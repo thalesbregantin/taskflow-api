@@ -1,5 +1,18 @@
 # Taskflow API — Guia do Agente
 
+## Contexto do Desenvolvedor
+
+Leia sempre o vault Obsidian antes de começar qualquer sessão:
+- **Vault:** `~/Documents/AgentVault/`
+- **Memória do agente:** `~/Documents/AgentVault/Agent/Memory.md`
+- **Tasks ativas:** `~/Documents/AgentVault/Agent/Tasks.md`
+- **Stack e padrões:** `~/Documents/AgentVault/Knowledge/fastapi-stack.md`
+- **Qualidade:** `~/Documents/AgentVault/Knowledge/qualidade-de-software.md`
+
+Este projeto é portfólio para vaga de dev Python — qualidade e apresentação importam tanto quanto funcionalidade.
+
+---
+
 ## O que é este projeto
 
 Backend SaaS em FastAPI com autenticação JWT. Permite que usuários se registrem, façam login e gerenciem suas tarefas pessoais (modelo `Task` a ser implementado).
