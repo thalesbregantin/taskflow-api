@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 from app.core.database import Base, get_db
 from app.main import app
 
-TEST_DATABASE_URL = "postgresql+asyncpg://user:password@localhost/taskflow_test"
+TEST_DATABASE_URL = "postgresql+psycopg://user:password@localhost/taskflow_test"
 
 
 @pytest_asyncio.fixture(scope="session")
