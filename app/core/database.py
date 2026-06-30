@@ -6,7 +6,8 @@ from sqlalchemy.pool import NullPool
 
 from app.core.config import settings
 
-engine = create_async_engine(settings.DATABASE_URL, poolclass=NullPool)
+connect_args = {"ssl": True} if settings.DATABASE_SSL else {}
+engine = create_async_engine(settings.DATABASE_URL, poolclass=NullPool, connect_args=connect_args)
 AsyncSessionLocal = async_sessionmaker(engine, expire_on_commit=False)
 
 

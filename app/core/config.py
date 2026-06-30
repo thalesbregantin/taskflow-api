@@ -10,15 +10,18 @@ class Settings(BaseSettings):
 
     model_config = SettingsConfigDict(env_file=".env")
 
+    DATABASE_SSL: bool = False
+
     @field_validator("DATABASE_URL")
     @classmethod
     def normalise_db_url(cls, v: str) -> str:
-        # Render and some providers deliver postgres:// or postgresql://
-        # asyncpg requires postgresql+asyncpg://
+        # Providers deliver postgres:// or postgresql://; asyncpg needs postgresql+asyncpg://
         if v.startswith("postgres://"):
-            return v.replace("postgres://", "postgresql+asyncpg://", 1)
-        if v.startswith("postgresql://"):
-            return v.replace("postgresql://", "postgresql+asyncpg://", 1)
+            v = v.replace("postgres://", "postgresql+asyncpg://", 1)
+        elif v.startswith("postgresql://"):
+            v = v.replace("postgresql://", "postgresql+asyncpg://", 1)
+        # asyncpg doesn't accept ?sslmode in the URL — SSL is set via connect_args
+        v = v.replace("?sslmode=require", "").replace("&sslmode=require", "")
         return v
 
 
