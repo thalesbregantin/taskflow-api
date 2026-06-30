@@ -6,7 +6,10 @@ from sqlalchemy.pool import NullPool
 
 from app.core.config import settings
 
-connect_args = {"ssl": True} if settings.DATABASE_SSL else {}
+connect_args: dict[str, object] = {}
+if settings.DATABASE_SSL:
+    # Supabase pooler (transaction mode) requires SSL and no prepared statements
+    connect_args = {"ssl": True, "statement_cache_size": 0}
 engine = create_async_engine(settings.DATABASE_URL, poolclass=NullPool, connect_args=connect_args)
 AsyncSessionLocal = async_sessionmaker(engine, expire_on_commit=False)
 
